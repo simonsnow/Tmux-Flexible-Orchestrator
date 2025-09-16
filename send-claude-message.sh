@@ -1,25 +1,8 @@
 #!/bin/bash
 
-# Send message to Claude agent in tmux window
-# Usage: send-claude-message.sh <session:window> <message>
+# Deprecated shim for backward compatibility
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_SCRIPT="$SCRIPT_DIR/send-chatgpt-message.sh"
 
-if [ $# -lt 2 ]; then
-    echo "Usage: $0 <session:window> <message>"
-    echo "Example: $0 agentic-seek:3 'Hello Claude!'"
-    exit 1
-fi
-
-WINDOW="$1"
-shift  # Remove first argument, rest is the message
-MESSAGE="$*"
-
-# Send the message
-tmux send-keys -t "$WINDOW" "$MESSAGE"
-
-# Wait 0.5 seconds for UI to register
-sleep 0.5
-
-# Send Enter to submit
-tmux send-keys -t "$WINDOW" Enter
-
-echo "Message sent to $WINDOW: $MESSAGE"
+>&2 echo "[deprecated] Use send-chatgpt-message.sh instead of send-claude-message.sh"
+exec "$TARGET_SCRIPT" "$@"

@@ -6,7 +6,7 @@
 - **Issue**: Developer spent 2+ hours trying to solve JWT multiline environment variable issue in Convex
 - **Mistake**: As PM, I didn't suggest web research until prompted by the user
 - **Learning**: Should ALWAYS suggest web research after 10 minutes of failed attempts
-- **Solution**: Added "Web Research is Your Friend" section to global CLAUDE.md
+- **Solution**: Added "Web Research is Your Friend" section to global CHATGPT.md
 - **Impact**: Web search immediately revealed the solution (replace newlines with spaces)
 
 ### Insight: Reading Error Messages Carefully
@@ -83,14 +83,14 @@
 - **Example**: Listed exact items to include in LEARNINGS.md
 - **Impact**: Ensures institutional knowledge is captured
 
-### Claude Plan Mode Discovery
-- **Feature**: Claude has a plan mode activated by Shift+Tab+Tab
-- **Key Sequence**: Hold Shift, press Tab, press Tab again, release Shift
-- **Critical Step**: MUST verify "⏸ plan mode on" appears - may need multiple attempts
-- **Tmux Implementation**: `tmux send-keys -t session:window S-Tab S-Tab`
-- **Verification**: `tmux capture-pane | grep "plan mode on"`
-- **Troubleshooting**: If not activated, send additional S-Tab until confirmed
-- **User Correction**: User had to manually activate it for me initially
-- **Use Case**: Activated plan mode for complex password reset implementation
-- **Best Practice**: Always verify activation before sending planning request
-- **Key Learning**: Plan mode forces thoughtful approach before coding begins
+### ChatGPT Plan Mode Discovery
+- **Feature**: ChatGPT has planning capabilities that can be activated through specific prompts
+- **Key Approach**: Request ChatGPT to create a plan before implementing features
+- **Critical Step**: MUST verify ChatGPT acknowledges the planning request
+- **Tmux Implementation**: Use `send-chatgpt-message.sh` to send planning requests
+- **Verification**: Check ChatGPT response includes step-by-step breakdown
+- **Troubleshooting**: If no plan provided, rephrase request for explicit planning
+- **User Guidance**: Users can help guide ChatGPT into proper planning mode
+- **Use Case**: Use planning mode for complex feature implementations
+- **Best Practice**: Always request planning before major coding begins
+- **Key Learning**: Planning mode forces thoughtful approach before coding begins
