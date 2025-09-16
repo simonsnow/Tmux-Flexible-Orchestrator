@@ -94,3 +94,10 @@
 - **Use Case**: Use planning mode for complex feature implementations
 - **Best Practice**: Always request planning before major coding begins
 - **Key Learning**: Planning mode forces thoughtful approach before coding begins
+
+## 2025-09-16 - Spec Kit Integration
+
+- **Key Insight**: Vendoring Spec Kit enables offline-first workflows when GitHub releases are unreachable.
+- **Workflow Change**: All ChatGPT agents now follow `/specify → /plan → /tasks` before writing code; documentation updated in `CHATGPT.md` and `README.md`.
+- **Fallback Strategy**: Copy templates from `spec-kit/templates/` into `specs/<feature>/` to bootstrap artifacts without running the CLI.
+- **Verification**: Introduced example artifacts in `specs/001-orchestrator-v2-spec-kit/` to set expectations and validate the pipeline end-to-end.

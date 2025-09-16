@@ -199,6 +199,57 @@ windows = orchestrator.find_window_by_name("project-manager")
    ./send-chatgpt-message.sh project-name-role:0 "cd /path/to/project && git status && ls -la"
    ```
 
+## 🧩 Spec Kit Workflow (v2)
+
+The orchestrator now defaults to a Spec-Driven Development flow using the bundled `spec-kit` submodule. Every new initiative must progress through these phases **before any coding begins**:
+
+1. **/specify** – capture the feature specification using `spec-kit/templates/spec-template.md` as the structure. Store output in `specs/<feature>/spec.md`.
+2. **/plan** – generate implementation planning artifacts (`plan.md`, `research.md`, `data-model.md`, `quickstart.md`, `contracts/`). Align decisions with the repository constitution and tmux-based workflows.
+3. **/tasks** – produce a numbered task list in `specs/<feature>/tasks.md` that maps directly to functional requirements. Tasks must include verification steps and call out parallelizable work.
+
+### What Agents Must Do
+- Project Managers enforce the `/specify → /plan → /tasks` order and reject work that skips steps.
+- Developers request the latest spec artifacts before implementing anything.
+- QA verifies that `spec.md`, `plan.md`, and `tasks.md` exist and match the active feature prior to testing.
+
+### Offline Fallback
+- If the `specify` CLI cannot download templates, copy the bundled files:
+  ```bash
+  mkdir -p specs/new-feature
+  cp spec-kit/templates/spec-template.md specs/new-feature/spec.md
+  cp spec-kit/templates/plan-template.md specs/new-feature/plan.md
+  cp spec-kit/templates/tasks-template.md specs/new-feature/tasks.md
+  ```
+- Update the copied files manually, keeping section order intact.
+
+### Handling Script Errors & Missing Prerequisites
+
+If Spec Kit commands (`/specify`, `/plan`, `/tasks`) fail due to missing prerequisites (e.g., uncreated git branch, missing CLI tools), do the following:
+
+1. Ensure a feature branch exists:
+
+   ```bash
+   git checkout -b feature/<name>
+   ```
+
+2. Verify required tools are available:
+
+   ```bash
+   tmux -V
+   git --version
+   uvx --help
+   ```
+
+3. If errors persist, notify the Orchestrator and halt further steps:
+
+   ```bash
+   ./send-chatgpt-message.sh orchestrator-v2:0 "Spec Kit script failure: [error details]"
+   ```
+
+### Example Project
+- Reference `specs/001-orchestrator-v2-spec-kit/` for a complete v2 walkthrough that demonstrates the required artifacts, plan structure, and task breakdown.
+- When briefing agents, point them to this directory as the canonical example of the expected output.
+
 ### Agent Termination
 
 When shutting down agents:

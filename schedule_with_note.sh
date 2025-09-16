@@ -11,6 +11,11 @@ echo "=== Next Check Note ($(date)) ===" > /Users/simon/Devel/Tmux-Flexible-Orch
 echo "Scheduled for: $MINUTES minutes" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
 echo "" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
 echo "$NOTE" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
+echo "" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
+echo "Checklist for Spec Kit v2 Integration:" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
+echo "- Verify spec.md, plan.md, and tasks.md exist" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
+echo "- Confirm README.md and CHATGPT.md reflect the Spec Kit workflow" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
+echo "- Run verification script: ./verify_speckit_artifacts.sh specs/<feature>" >> /Users/simon/Devel/Tmux-Flexible-Orchestrator/next_check_note.txt
 
 echo "Scheduling check in $MINUTES minutes with note: $NOTE"
 

@@ -79,7 +79,7 @@ EOF
 tmux new-session -s my-project
 
 # 3. Start project manager in window 0
-chatgpt
+codex
 
 # 4. Give PM the spec and let it create an engineer
 "You are a Project Manager. Read project_spec.md and create an engineer 
@@ -94,7 +94,7 @@ in window 1 to implement it. Schedule check-ins every 30 minutes."
 ```bash
 # Start the orchestrator
 tmux new-session -s orchestrator
-chatgpt
+codex
 
 # Give it your projects
 "You are the Orchestrator. Set up project managers for:
@@ -102,6 +102,47 @@ chatgpt
 2. Backend (FastAPI) - Optimize database queries
 Schedule yourself to check in every hour."
 ```
+
+### Spec Kit v2 Example
+
+The repository now ships with a complete Spec Kit walkthrough under `specs/001-orchestrator-v2-spec-kit/`. Use it as the baseline for every new initiative:
+
+```bash
+# Inspect the bundled example artifacts
+ls specs/001-orchestrator-v2-spec-kit/
+
+# Copy templates for a fresh feature (offline-safe)
+mkdir -p specs/002-new-feature
+cp spec-kit/templates/spec-template.md specs/002-new-feature/spec.md
+cp spec-kit/templates/plan-template.md specs/002-new-feature/plan.md
+cp spec-kit/templates/tasks-template.md specs/002-new-feature/tasks.md
+```
+
+Agents must complete `/specify`, `/plan`, and `/tasks` in that order before writing any implementation code. See `CHATGPT.md` for briefing language that enforces this workflow.
+
+### Handling Script Errors & Missing Prerequisites
+
+If Spec Kit commands (`/specify`, `/plan`, `/tasks`) fail due to missing prerequisites (e.g., uncreated git branch, missing CLI tools), follow these recovery steps:
+
+1. Ensure you're on a feature branch:
+
+   ```bash
+   git checkout -b feature/<name>
+   ```
+
+2. Verify required tools are available:
+
+   ```bash
+   tmux -V
+   git --version
+   uvx --help
+   ```
+
+3. If errors persist, notify the Orchestrator and pause the workflow:
+
+   ```bash
+   ./send-chatgpt-message.sh orchestrator:0 "Spec Kit script failure: [error details]"
+   ```
 
 ## ✨ Key Features
 
